@@ -9,3 +9,7 @@ class ModifyRequest(BaseModel):
 class PromptRequest(BaseModel):
     language: str
     task: str
+    
+class ProjectRequest(BaseModel):
+    description: str
+    project_type: str

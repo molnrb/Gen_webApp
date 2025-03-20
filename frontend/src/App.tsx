@@ -11,13 +11,16 @@ import useUIStateStore from './state/UIStateStore';
 import useChatState from './state/ChatStore';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import FeedbackInput from './chat/FeedBackInput';
+import ProjectGenerator from './chat/ProjectGenerator';
+import FileExplorer from './FileExplorer';
+import TextEditor from './TextEditor';
 
 const queryClient = new QueryClient();
 
 export default function App() {
   const { code } = useCodeStore();
   const { isSidebarOpen } = useUIStateStore();
-  const [ activeChat, setActiveChat ] = useState<'generate' | 'modify'>('generate');
+  const [ activeChat, setActiveChat ] = useState<'generate' | 'project' | 'modify'>('generate');
   const [activeTab, setActiveTab] = useState<'sandbox' | 'editor'>('sandbox');
 
   return (
@@ -33,9 +36,10 @@ export default function App() {
           <Chat />
           <div className="flex space-x-4 border-b p-2">
             <button onClick={() => setActiveChat('generate')} className={activeChat === 'generate' ? 'font-bold' : ''}>Generate</button>
+            <button onClick={() => setActiveChat('project')} className={activeChat === 'project' ? 'font-bold' : ''}>Project</button>
             <button onClick={() => setActiveChat('modify')} className={activeChat === 'modify' ? 'font-bold' : ''}>Modify</button>
           </div>
-          {activeChat === 'generate' ? <ChatInput /> : <FeedbackInput />}
+          {activeChat === 'generate' ? <ChatInput /> : <ProjectGenerator />}
           
           
           
@@ -45,7 +49,7 @@ export default function App() {
             <button onClick={() => setActiveTab('sandbox')} className={activeTab === 'sandbox' ? 'font-bold' : ''}>Sandbox</button>
             <button onClick={() => setActiveTab('editor')} className={activeTab === 'editor' ? 'font-bold' : ''}>Code Editor</button>
           </div>
-          {activeTab === 'sandbox' ? <CodeSandbox code={code} /> : <CodeEditor code={code} />}
+          {activeTab === 'sandbox' ? <FileExplorer /> : <TextEditor />}
           
         </div>
       </QueryClientProvider>
