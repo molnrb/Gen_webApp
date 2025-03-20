@@ -30,7 +30,7 @@ async def modify_code(request: ModifyRequest):
     {request.code}
     ```
 
-    Modify the code according to the feedback and return only the updated code. 
+    Modify the code according to the feedback and return only the updated code as a whole. 
     Do not add explanations or any extra text.
     """
 

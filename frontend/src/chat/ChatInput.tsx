@@ -5,7 +5,7 @@ import useFetchAIResponse from "../hooks/useFetchAIResponse";
 
 export function ChatInput() {
   const { prompt, setPrompt, handleKeyDown, handleChange } = useChatInput("", () => sendUserPrompt(prompt));
-  const { extractedCode, responseMessage, isPending, sendUserPrompt } = useFetchAIResponse();
+  const { isPending, sendUserPrompt } = useFetchAIResponse();
 
   return (
     <div className="p-4 dark:bg-zinc-900 flex justify-center items-center flex-col lg:pl-24 lg:pr-24">

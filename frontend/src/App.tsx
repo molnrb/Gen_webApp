@@ -17,6 +17,7 @@ const queryClient = new QueryClient();
 export default function App() {
   const { code } = useCodeStore();
   const { isSidebarOpen } = useUIStateStore();
+  const [ activeChat, setActiveChat ] = useState<'generate' | 'modify'>('generate');
   const [activeTab, setActiveTab] = useState<'sandbox' | 'editor'>('sandbox');
 
   return (
@@ -30,8 +31,14 @@ export default function App() {
         <div className="flex h-screen w-screen flex-col">
           <Header />
           <Chat />
-          <ChatInput />
-          <FeedbackInput />
+          <div className="flex space-x-4 border-b p-2">
+            <button onClick={() => setActiveChat('generate')} className={activeChat === 'generate' ? 'font-bold' : ''}>Generate</button>
+            <button onClick={() => setActiveChat('modify')} className={activeChat === 'modify' ? 'font-bold' : ''}>Modify</button>
+          </div>
+          {activeChat === 'generate' ? <ChatInput /> : <FeedbackInput />}
+          
+          
+          
         </div>
         <div className="h-screen w-300 flex flex-col overflow-hidden">
           <div className="flex space-x-4 border-b p-2">
